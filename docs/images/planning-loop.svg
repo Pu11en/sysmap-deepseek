@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 310" role="img" aria-labelledby="title desc">
+<title id="title">sysmap: from conversation to a connected system plan</title>
+<desc id="desc">Talk through an idea, preserve decisions in one plan, explore the clickable map, then build only when authorized. Questions stay in chat.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker></defs>
+<rect width="1120" height="310" rx="20" fill="#f8fafc"/>
+<text x="36" y="44" fill="#0f172a" font-family="system-ui,sans-serif" font-size="24" font-weight="700">Plan systems you can see.</text>
+<text x="36" y="73" fill="#475569" font-family="system-ui,sans-serif" font-size="16">A planning skill for AI assistants. One saved plan, connected parts, clear decisions.</text>
+<g font-family="system-ui,sans-serif" text-anchor="middle">
+<rect x="36" y="105" width="235" height="110" rx="14" fill="#eff6ff" stroke="#93c5fd"/>
+<text x="153" y="143" font-size="19" font-weight="700" fill="#1e3a8a">1. Talk it through</text><text x="153" y="176" font-size="15" fill="#334155">Explain, propose, decide.</text>
+<rect x="307" y="105" width="235" height="110" rx="14" fill="#f0fdf4" stroke="#86efac"/>
+<text x="424" y="143" font-size="19" font-weight="700" fill="#14532d">2. Save one plan</text><text x="424" y="176" font-size="15" fill="#334155">Keep agreed meaning.</text>
+<rect x="578" y="105" width="235" height="110" rx="14" fill="#eff6ff" stroke="#93c5fd"/>
+<text x="695" y="143" font-size="19" font-weight="700" fill="#1e3a8a">3. Explore the map</text><text x="695" y="176" font-size="15" fill="#334155">Click into each part.</text>
+<rect x="849" y="105" width="235" height="110" rx="14" fill="#fff7ed" stroke="#fdba74"/>
+<text x="966" y="143" font-size="19" font-weight="700" fill="#9a3412">4. Build when approved</text><text x="966" y="176" font-size="15" fill="#334155">Planning is not permission.</text>
+</g>
+<g stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"><path d="M276 160H300"/><path d="M547 160H571"/><path d="M818 160H842"/></g>
+<path d="M696 218V238H155V220" fill="none" stroke="#94a3b8" stroke-width="1.7" marker-end="url(#arrow)"/>
+<text x="424" y="265" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#475569">Keep refining the same plan.</text>
+<text x="1084" y="289" text-anchor="end" font-family="system-ui,sans-serif" font-size="13" fill="#64748b">System flow on the map. Questions in chat.</text>
+</svg>

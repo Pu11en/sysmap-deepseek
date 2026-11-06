@@ -1,77 +1,122 @@
 # sysmap
 
-Plan a system together, then explore its parts in a clickable map.
+**Plan a system you can see—not a wall of text.**
 
-This repository provides an Agent Skills-format skill and small local map helpers. It is harness-independent: no particular assistant application is required. This is a portability goal, not certification across harnesses.
+Talk through an idea with your AI assistant. Keep decisions in one saved plan. Explore the system through clickable maps.
 
-The skill preserves decisions, separates facts from proposals, and moves planning forward. It does not grant permission to build the planned product.
+![How sysmap works: discuss an idea, save decisions, explore the map, and build only when approved](docs/images/planning-loop.svg)
 
-## Install the skill
+[See the example](#see-it-in-action) · [Use the skill](#use-the-skill) · [Run the viewer](#run-the-example) · [Planning guide](references/planning.md)
 
-Clone or copy this repository into your harness's discovered skill directory. Keep [SKILL.md](SKILL.md) at the skill folder's root, alongside [references/planning.md](references/planning.md). Keep the repository together if you want its helpers.
+## See it in action
 
-**Discovery paths differ between harnesses.** Check your harness's instructions for its supported location and whether it needs a restart. Do not assume one installation path works everywhere.
+### Start with the whole system
 
-If your harness has no skills feature, explicitly ask the assistant to read [SKILL.md](SKILL.md), then follow its linked planning guide. Reading instructions manually does not prove full harness integration.
+This example shows how borrowing a library book works. Follow the arrows from request to result.
 
-## Try the local map helpers
+![Actual sysmap viewer showing the complete library book-borrowing example, fitted to the screen](docs/images/overview.png)
 
-Use Node.js **20 or newer**. Run these commands from the repository root. No npm dependencies or installation step are required.
+### Click a box to understand its job
+
+Click **Check available copies**. Its detail page shows only that part's work. **Back** returns to the whole system.
+
+![Actual detail page for checking copies, showing the incoming request, saved copy records, count, result, and Back button](docs/images/detail.png)
+
+*These are real screenshots of the included example, not interface mockups. Dashed boxes describe an illustrative plan—not a built library service.*
+
+## What the skill helps with
+
+| Instead of… | sysmap asks the assistant to… |
+| --- | --- |
+| Forgetting an earlier decision | Read and preserve the saved plan. |
+| Asking endless small questions | Settle a point, then propose the next meaningful part. |
+| Putting unrelated work inside a box | Define its job, inputs, results, and boundaries. |
+| Opening a page because its letter happens to match | Use an explicit destination for each linked box. |
+| Presenting suggestions as facts | Separate evidence, agreed plans, proposals, and unknowns. |
+| Coding while you're still planning | Wait for separate implementation permission. |
+
+These are planning instructions, not guarantees of model correctness. The helper checks catch structural mistakes; a sensible design still needs review.
+
+## Use the skill
+
+sysmap uses the **Agent Skills** format. It is portable by design, without a dependency on a particular AI application. Cross-harness compatibility has not been certified.
+
+1. Clone or download [this repository](https://github.com/Pu11en/sysmap).
+2. Put the repository in your assistant's supported skill directory, keeping its files together.
+3. Ask the assistant:
+
+> Use sysmap to help me plan this system. Show the system on a map, keep questions in chat, and don't build it yet.
+
+**Skill locations differ between applications.** Follow your application's installation instructions. The entry point is [SKILL.md](SKILL.md); its detailed method is in [the planning guide](references/planning.md).
+
+If your assistant has no skills feature, ask it to read those files explicitly. That does not prove full integration.
+
+## Run the example
+
+Requires **Node.js 20+** and a browser. No npm package installation is needed.
 
 ```sh
+git clone https://github.com/Pu11en/sysmap.git
+cd sysmap
 node scripts/build.mjs examples/library.plan.json --out output
 node scripts/serve.mjs --dir output --port 4321
 ```
 
-Open <http://127.0.0.1:4321/?map=library> while the server is running. Stop the foreground server with Ctrl+C.
+Open **<http://127.0.0.1:4321/?map=library>**. Keep the server running; stop it with Ctrl+C. Choose another port if 4321 is already in use.
 
-The builder writes Mermaid text (`.mmd`) and a navigation manifest (`.json`) into the selected output directory. It does **not** write SVG images. The browser viewer loads **Mermaid 11.4.1 from jsDelivr**, requiring internet access, and renders the drawing in the browser.
+The builder writes Mermaid text and explicit navigation metadata. The browser loads **Mermaid 11.4.1 from jsDelivr** and renders the drawing. **Internet access is required.** It is not an offline viewer, and the builder does not write SVG files.
 
-Viewer controls:
+### Move around
 
-- **Fit:** fit the current page to the viewing area.
-- **Ctrl + scroll:** zoom the drawing.
-- **Space + left-drag:** move around the drawing.
-- **Click a linked box:** open its explicitly assigned detail page.
-- **Back:** return through the page navigation history.
+| Control | Result |
+| --- | --- |
+| Click a linked box | Open that part's detail page. |
+| Back | Return to the previous page. |
+| Fit | Show the whole current page. |
+| Ctrl + scroll | Zoom in or out. |
+| Hold Space + left-drag | Grab and move the map. |
+| Normal scroll | Move vertically; horizontal wheel movement also pans. |
 
-There is no top step-button bar. Nested pages are reached through explicit page metadata, not inferred from matching box names.
+Each page opens fitted. There is no row of step buttons taking space above the map. Questions stay in your assistant's chat.
 
-## Keep one source plan
+## Your own system
 
-For your own work, create one uniquely named `.plan.json` source per planning conversation. Choose a private local location outside the repository when appropriate. The new source plan becomes the authority; edit it, not generated files. Rebuild after changes.
+Use **one uniquely named `.plan.json` source per planning conversation**. The assistant edits that source, not generated diagrams. Rebuild after plan changes.
 
-The source format includes:
+The source contains:
 
-- `nodes`: `{id, label, shape, status, detail?}` records.
-- `links`: `{from, to, label}` records.
-- `steps`: `{id, label, nodes, links}` detail-page records.
-- Planning notes: goal, decisions, open questions, part records, and planning position.
+- **Flow:** nodes, labeled connections, and detail pages.
+- **Meaning:** each part's job, input, work, result, rules, and boundary.
+- **Decisions:** what is agreed, proposed, unknown, and next to discuss.
 
-`detail` names an explicit destination page id. Page ids are globally unique; node ids are scoped to their page. Deeper navigation uses detail links between pages in `steps`, not nested array objects. See [the planning guide](references/planning.md) for constraints and examples.
+See [the complete example](examples/library.plan.json) and [source format](references/planning.md#4-source-format-and-navigation). Detail links name exact pages; repeated local box ids do not create links.
 
-## Privacy and verification
+Keep private plans outside this repository or otherwise out of version control. The server binds to localhost only. Do not expose it through a public tunnel. The viewer contacts jsDelivr for its drawing library.
 
-The helper serves map data on **localhost only**. Do not expose it through a public tunnel or shared proxy. Keep generated output and private local plans out of git. Review files before committing: a local-only server does not make committed plans private. The viewer contacts jsDelivr to download Mermaid; it is not an offline viewer.
-
-Run the helper checks:
+## Checks and limits
 
 ```sh
 npm test
 ```
 
-Eight automated checks passed on the author's Windows environment: validation, explicit navigation metadata, generated output, server access restrictions, and viewer script syntax. A separate headless Chrome check rendered the example and found a linked box. These checks do not establish correct planning, physical mouse behavior, or compatibility across harnesses. The multi-platform CI configuration is included but has not yet run on GitHub.
+Eight automated checks passed in the author's Windows environment. They cover plan structure, explicit navigation, output generation, server restrictions, and viewer script syntax.
 
-Optional browser render check, after setting `CHROME` to your Chrome or Chromium executable:
+Headless Chrome also rendered the example and its detail-page screenshots. **Physical mouse behavior, planning quality, and operation inside other AI applications remain unverified.** Multi-platform CI is included; check the repository's actual Actions results before claiming a platform passed.
+
+<details>
+<summary>Browser checks and reproducible screenshots</summary>
+
+Set `CHROME` to your Chrome or Chromium executable, then run:
 
 ```sh
 node tests/browser-smoke.mjs
+node scripts/capture-docs.mjs
 ```
 
-This browser check also needs network access to jsDelivr. It does not exercise physical keyboard or mouse controls.
+Both need network access. Screenshot capture recreates the two images above from the included example. These checks do not simulate a complete human planning session.
 
-## Sources and license
+</details>
 
-Original repository work is offered under the [MIT license](LICENSE). External planning ideas are acknowledged in [the planning guide](references/planning.md#sources). Mermaid is an external browser dependency; its code is not bundled by the builder.
+## License and sources
 
-This documentation does not announce publication or an official hosting destination.
+Original repository work is [MIT licensed](LICENSE). See [external software](THIRD_PARTY.md) and [planning sources](references/planning.md#sources). No affiliation or endorsement by another skill project or AI application is implied.
