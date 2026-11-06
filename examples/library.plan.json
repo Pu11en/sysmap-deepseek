@@ -1,0 +1,46 @@
+{
+  "title": "Example: borrow a book",
+  "goal": "A reader receives an available book with a recorded loan.",
+  "nodes": [
+    {"id":"REQUEST","label":"Request a book","shape":"start","status":"planned"},
+    {"id":"CHECK","label":"Check available copies","detail":"CheckCopies","status":"planned"},
+    {"id":"AVAILABLE","label":"Copy available?","shape":"decision","status":"planned"},
+    {"id":"LOAN","label":"Record the loan","shape":"store","status":"planned"},
+    {"id":"RECEIVE","label":"Receive the book","shape":"start","status":"planned"},
+    {"id":"WAIT","label":"Offer waiting list","status":"planned"}
+  ],
+  "links": [
+    {"from":"REQUEST","to":"CHECK","label":"supplies book identifier"},
+    {"from":"CHECK","to":"AVAILABLE","label":"returns available count"},
+    {"from":"AVAILABLE","to":"LOAN","label":"yes: records reader and copy"},
+    {"from":"LOAN","to":"RECEIVE","label":"confirms recorded loan"},
+    {"from":"AVAILABLE","to":"WAIT","label":"no: offers waiting"}
+  ],
+  "steps": [
+    {"id":"CheckCopies","label":"Inside: check copies","nodes":[
+      {"id":"REQUEST","label":"Requested book arrives","shape":"start","status":"planned"},
+      {"id":"READ","label":"Read saved copies","shape":"store","status":"planned"},
+      {"id":"COUNT","label":"Count available copies","status":"planned"},
+      {"id":"RETURN","label":"Return available count","shape":"start","status":"planned"}
+    ],"links":[
+      {"from":"REQUEST","to":"READ","label":"supplies book identifier"},
+      {"from":"READ","to":"COUNT","label":"supplies matching copy records"},
+      {"from":"COUNT","to":"RETURN","label":"excludes copies on loan"}
+    ]}
+  ],
+  "partRecords": {
+    "main/CHECK": {
+      "purpose":"Determine whether a copy is available.",
+      "input":"Requested book identifier.",
+      "action":"Read saved copies and count those not on loan.",
+      "output":"Available-copy count.",
+      "rules":["Copies already on loan do not count as available."],
+      "next":"main/AVAILABLE receives the count.",
+      "boundary":"Does not record the loan or hand over a book.",
+      "basis":"Fictional example, not verified implementation."
+    }
+  },
+  "decisions": ["Show this as an illustrative plan, not a built system."],
+  "openQuestions": [],
+  "planningPosition": {"currentPart":"Check available copies","settledPoints":["Availability checking is separate from recording the loan."],"nextMaterialDecision":"None for this teaching example."}
+}

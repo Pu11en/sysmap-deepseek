@@ -1,0 +1,7 @@
+node_modules/
+output/
+*.local.plan.json
+.env
+.env.*
+.DS_Store
+Thumbs.db
