@@ -13,7 +13,7 @@ if (!process.env.CHROME) throw new Error('Set CHROME to a Chrome or Chromium exe
 const root=fileURLToPath(new URL('../',import.meta.url))
 const images=path.join(root,'docs','images')
 await fsp.mkdir(images,{recursive:true})
-const temporary=await fsp.mkdtemp(path.join(os.tmpdir(),'sysmap-docs-'))
+const temporary=await fsp.mkdtemp(path.join(os.tmpdir(),'deepseek-docs-'))
 const output=path.join(temporary,'output')
 await build(path.join(root,'examples','library.plan.json'),output)
 const server=createServer(output)
@@ -30,7 +30,7 @@ try {
       const code=await new Promise((resolve,reject)=>{child.on('error',reject);child.on('exit',resolve)}).finally(()=>clearTimeout(timeout))
       assert.equal(code,0,'Browser must complete '+name)
       const dom=await fsp.readFile(domFile,'utf8')
-      assert.match(dom,/<svg[^>]+id="sysmap_/,'Map must render before '+name+' capture')
+      assert.match(dom,/<svg[^>]+id="deepseek_/,'Map must render before '+name+' capture')
       assert.ok((await fsp.stat(screenshot)).size>15000,'Screenshot must contain more than blank chrome')
       console.log('Captured '+name+'.png')
     } finally { fs.closeSync(fd) }

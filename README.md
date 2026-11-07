@@ -1,97 +1,102 @@
-# sysmap
+# deepseek
 
-**Plan a system you can see—not a wall of text.**
+**Visual system planning for DeepSeek Harness.**
 
-Talk through an idea with your AI assistant. Keep decisions in one saved plan. Explore the system through clickable maps.
+Plan in chat. See the system on a map. Click a part to understand its job.
 
-![How sysmap works: discuss an idea, save decisions, explore the map, and build only when approved](docs/images/planning-loop.svg)
+This is an independent community skill for **DeepSeek Harness**, not an official DeepSeek product or a skill package for other AI applications. Previously named sysmap.
 
-[See the example](#see-it-in-action) · [Use the skill](#use-the-skill) · [Run the viewer](#run-the-example) · [Planning guide](references/planning.md)
+![How the deepseek planning skill works: discuss, save decisions, explore the map, then build only when approved](docs/images/planning-loop.svg)
+
+[See it](#see-it-in-action) · [Install in DeepSeek Harness](#install-in-deepseek-harness) · [Try the map](#try-the-map) · [Planning guide](references/planning.md)
 
 ## See it in action
 
-### Start with the whole system
+### The whole system
 
-This example shows how borrowing a library book works. Follow the arrows from request to result.
+The included example shows how borrowing a library book works. Follow the arrows from request to result.
 
-![Actual sysmap viewer showing the complete library book-borrowing example, fitted to the screen](docs/images/overview.png)
+![The deepseek map viewer showing the complete book-borrowing example](docs/images/overview.png)
 
-### Click a box to understand its job
+### Inside one part
 
-Click **Check available copies**. Its detail page shows only that part's work. **Back** returns to the whole system.
+Click **Check available copies** to see only that part's work. **Back** returns to the whole system.
 
-![Actual detail page for checking copies, showing the incoming request, saved copy records, count, result, and Back button](docs/images/detail.png)
+![Detail page showing the request, saved copy records, available count, result, and Back button](docs/images/detail.png)
 
-*These are real screenshots of the included example, not interface mockups. Dashed boxes describe an illustrative plan—not a built library service.*
+*Real screenshots of the included example. Dashed boxes represent a plan—not a built library service.*
 
-## What the skill helps with
+## What it changes about planning
 
-| Instead of… | sysmap asks the assistant to… |
+| Instead of… | The skill guides your assistant to… |
 | --- | --- |
-| Forgetting an earlier decision | Read and preserve the saved plan. |
+| Forgetting earlier decisions | Read and preserve one saved plan. |
 | Asking endless small questions | Settle a point, then propose the next meaningful part. |
-| Putting unrelated work inside a box | Define its job, inputs, results, and boundaries. |
-| Opening a page because its letter happens to match | Use an explicit destination for each linked box. |
+| Mixing unrelated work inside a box | Define its job, inputs, results, and boundaries. |
+| Opening an unrelated detail page | Follow explicit page links, not matching letters. |
 | Presenting suggestions as facts | Separate evidence, agreed plans, proposals, and unknowns. |
-| Coding while you're still planning | Wait for separate implementation permission. |
+| Coding before planning is finished | Wait for separate implementation permission. |
 
-These are planning instructions, not guarantees of model correctness. The helper checks catch structural mistakes; a sensible design still needs review.
+Questions stay in DeepSeek Harness chat. The side map shows how the system works.
 
-## Use the skill
+## Install in DeepSeek Harness
 
-sysmap uses the **Agent Skills** format. It is portable by design, without a dependency on a particular AI application. Cross-harness compatibility has not been certified.
+Requires DeepSeek Harness with filesystem skill discovery enabled. Install this repository as the `deepseek` skill in your DSH home directory. The default is `~/.dsh/skills/deepseek`.
 
-1. Clone or download [this repository](https://github.com/Pu11en/sysmap).
-2. Put the repository in your assistant's supported skill directory, keeping its files together.
-3. Ask the assistant:
-
-> Use sysmap to help me plan this system. Show the system on a map, keep questions in chat, and don't build it yet.
-
-**Skill locations differ between applications.** Follow your application's installation instructions. The entry point is [SKILL.md](SKILL.md); its detailed method is in [the planning guide](references/planning.md).
-
-If your assistant has no skills feature, ask it to read those files explicitly. That does not prove full integration.
-
-## Run the example
-
-Requires **Node.js 20+** and a browser. No npm package installation is needed.
+For a default installation, run in PowerShell or a compatible shell:
 
 ```sh
-git clone https://github.com/Pu11en/sysmap.git
-cd sysmap
-node scripts/build.mjs examples/library.plan.json --out output
-node scripts/serve.mjs --dir output --port 4321
+git clone https://github.com/Pu11en/deepseek.git "$HOME/.dsh/skills/deepseek"
 ```
 
-Open **<http://127.0.0.1:4321/?map=library>**. Keep the server running; stop it with Ctrl+C. Choose another port if 4321 is already in use.
+If you use a custom DSH home, place the repository in that home's `skills/deepseek` directory instead. Keep the repository together: [SKILL.md](SKILL.md) loads [the planning guide](references/planning.md).
 
-The builder writes Mermaid text and explicit navigation metadata. The browser loads **Mermaid 11.4.1 from jsDelivr** and renders the drawing. **Internet access is required.** It is not an offline viewer, and the builder does not write SVG files.
+Then say in a DeepSeek Harness chat:
 
-### Move around
+> Use the deepseek skill to plan this system. Keep questions in chat, show the system on the map, and don't build it yet.
+
+If the skill does not appear, check skill discovery or reopen the chat. Installation does not change every chat's instructions automatically. This repository is a skill and map helper, not a profile-wide add-on.
+
+**Existing map setup?** Keep its current plan and viewer. These bundled helpers use explicit `detail` links and may have a different file format from an older setup. Do not replace your existing tools or plans just to install the skill.
+
+## Try the map
+
+The helper commands need **Node.js 20+** and a browser. No npm package installation is needed.
+
+From the installed repository:
+
+```sh
+cd "$HOME/.dsh/skills/deepseek"
+node scripts/build.mjs examples/library.plan.json --out output
+node scripts/serve.mjs --dir output --port 4322
+```
+
+Open **<http://127.0.0.1:4322/?map=library>** in the Harness side browser, or a browser tab. Port 4322 avoids the existing 4321 map setup used by some installations. Choose another free port if needed. Keep the server running; stop it with Ctrl+C.
+
+The builder writes Mermaid text and navigation metadata. The browser loads **Mermaid 11.4.1 from jsDelivr** to draw the map. Internet access is required; this is not an offline viewer. The builder does not write SVG files.
 
 | Control | Result |
 | --- | --- |
-| Click a linked box | Open that part's detail page. |
+| Click a linked box | Open its detail page. |
 | Back | Return to the previous page. |
 | Fit | Show the whole current page. |
 | Ctrl + scroll | Zoom in or out. |
 | Hold Space + left-drag | Grab and move the map. |
-| Normal scroll | Move vertically; horizontal wheel movement also pans. |
+| Normal scroll | Pan vertically; horizontal wheel movement also pans. |
 
-Each page opens fitted. There is no row of step buttons taking space above the map. Questions stay in your assistant's chat.
+Each page opens fitted. There is no top row of step buttons.
 
-## Your own system
+## Keep one source plan
 
-Use **one uniquely named `.plan.json` source per planning conversation**. The assistant edits that source, not generated diagrams. Rebuild after plan changes.
+Use one uniquely named `.plan.json` source per planning conversation. Edit that source, not generated drawings. Preserve its decisions and rebuild after changes.
 
-The source contains:
-
-- **Flow:** nodes, labeled connections, and detail pages.
+- **Flow:** parts, labeled connections, and detail pages.
 - **Meaning:** each part's job, input, work, result, rules, and boundary.
-- **Decisions:** what is agreed, proposed, unknown, and next to discuss.
+- **Discussion:** agreed decisions, open questions, and the next planning topic.
 
-See [the complete example](examples/library.plan.json) and [source format](references/planning.md#4-source-format-and-navigation). Detail links name exact pages; repeated local box ids do not create links.
+See [the example](examples/library.plan.json) and [source format](references/planning.md#4-source-format-and-navigation). Detail links name exact pages; reusing a local box id does not connect pages.
 
-Keep private plans outside this repository or otherwise out of version control. The server binds to localhost only. Do not expose it through a public tunnel. The viewer contacts jsDelivr for its drawing library.
+Keep private plans out of version control. The helper server binds to localhost only. Do not expose it through a public tunnel. The viewer contacts jsDelivr for its drawing library.
 
 ## Checks and limits
 
@@ -99,12 +104,12 @@ Keep private plans outside this repository or otherwise out of version control. 
 npm test
 ```
 
-Eight automated checks passed in the author's Windows environment. They cover plan structure, explicit navigation, output generation, server restrictions, and viewer script syntax.
+Eight automated checks passed in the author's Windows environment. They cover plan validation, explicit navigation, generated output, server restrictions, and viewer script syntax. Headless Chrome rendered the screenshots above.
 
-Headless Chrome also rendered the example and its detail-page screenshots. **Physical mouse behavior, planning quality, and operation inside other AI applications remain unverified.** Multi-platform CI is included; check the repository's actual Actions results before claiming a platform passed.
+**Physical mouse behavior and real multi-turn planning remain unverified by those checks.** A successful render does not prove the system design is correct. The repository's tests do not certify DeepSeek Harness integration or every model's behavior. See actual GitHub Actions results for platform checks.
 
 <details>
-<summary>Browser checks and reproducible screenshots</summary>
+<summary>Reproduce the screenshots</summary>
 
 Set `CHROME` to your Chrome or Chromium executable, then run:
 
@@ -113,10 +118,10 @@ node tests/browser-smoke.mjs
 node scripts/capture-docs.mjs
 ```
 
-Both need network access. Screenshot capture recreates the two images above from the included example. These checks do not simulate a complete human planning session.
+Both need network access. These checks render the example; they do not simulate a complete planning conversation.
 
 </details>
 
 ## License and sources
 
-Original repository work is [MIT licensed](LICENSE). See [external software](THIRD_PARTY.md) and [planning sources](references/planning.md#sources). No affiliation or endorsement by another skill project or AI application is implied.
+Original repository work is [MIT licensed](LICENSE). See [external software](THIRD_PARTY.md) and [planning sources](references/planning.md#sources). Not affiliated with or endorsed by DeepSeek or the referenced skill projects.

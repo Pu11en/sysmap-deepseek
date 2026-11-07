@@ -10,7 +10,7 @@ import assert from 'node:assert/strict'
 import { build } from '../scripts/build.mjs'
 import { createServer } from '../scripts/serve.mjs'
 if (!process.env.CHROME) throw new Error('Set CHROME to a Chrome or Chromium executable')
-const temporary=await fsp.mkdtemp(path.join(os.tmpdir(),'sysmap-browser-'))
+const temporary=await fsp.mkdtemp(path.join(os.tmpdir(),'deepseek-browser-'))
 const output=path.join(temporary,'output')
 await build(fileURLToPath(new URL('../examples/library.plan.json',import.meta.url)),output)
 const server=createServer(output)
@@ -22,7 +22,7 @@ try {
   const code=await new Promise((resolve,reject)=>{child.on('error',reject);child.on('exit',resolve) }).finally(()=>clearTimeout(timeout))
   assert.equal(code,0,'Browser must exit successfully')
   const dom=await fsp.readFile(path.join(temporary,'dom.html'),'utf8')
-  assert.match(dom,/<svg[^>]+id="sysmap_/,'Expected Mermaid-rendered SVG')
+  assert.match(dom,/<svg[^>]+id="deepseek_/,'Expected Mermaid-rendered SVG')
   assert.match(dom,/class="[^"]*linked/,'Expected a node with explicit child navigation')
   console.log('PASS: real Chromium rendered the example and attached a detail link. Physical interactions and other harnesses remain unverified.')
 } finally {

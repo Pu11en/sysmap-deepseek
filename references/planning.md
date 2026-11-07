@@ -151,7 +151,7 @@ For a clear plan change:
 4. If browser access is available, inspect rendering and actual navigation.
 5. Report what changed and what remains unverified.
 
-A question alone does not require redrawing. A successful build does not establish a correct system design. Helper command-line tests check schema constraints and generated output only. They do not prove browser layout, real mouse behavior, or compatibility across harnesses. If you cannot inspect the browser, say so. Never claim a click destination or interface behavior was verified without checking it.
+A question alone does not require redrawing. A successful build does not establish a correct system design. Helper command-line tests check schema constraints and generated output only. They do not prove browser layout, real mouse behavior, or reliable planning inside DeepSeek Harness. If you cannot inspect the browser, say so. Never claim a click destination or interface behavior was verified without checking it.
 
 ## Sources
 

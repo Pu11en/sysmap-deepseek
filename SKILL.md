@@ -1,9 +1,11 @@
 ---
-name: sysmap
-description: Plan and explain systems through a saved, clickable map. Use for collaborative design, continuing a planning conversation, system explanations, or preparing an agreed plan for implementation. Keep design questions in chat.
+name: deepseek
+description: Plan and explain systems in DeepSeek Harness through one saved, clickable map. Use for collaborative design, continuing planning, system explanations, or preparing an agreed plan for implementation. Keep questions in chat.
 ---
 
-# Plan through a system map
+# System planning in DeepSeek Harness
+
+This skill is for DeepSeek Harness. Keep the working map in its side browser and planning discussion in chat. Use the bundled viewer for a new setup; preserve existing map tools and source formats when continuing an established plan. It is an independent community skill, not an official DeepSeek product.
 
 Create a shared understanding before drawing or building. The map shows system behavior; chat holds discussion. Planning never grants permission to implement the product.
 
@@ -37,4 +39,4 @@ Label minor defaults as proposals. Do not silently decide permission, privacy, c
 
 After changing a plan, build it and inspect affected connections and child-page meaning. If browser access is available, inspect the drawing and navigation too. Report unavailable checks honestly.
 
-Helper tests check structure and generated output, not system truth, real browser interactions, or compatibility with every agent harness.
+Helper tests check structure and generated output, not system truth, physical mouse behavior, or reliable planning inside DeepSeek Harness.

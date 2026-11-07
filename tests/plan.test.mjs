@@ -42,7 +42,7 @@ test('supports nested explicit pages and rejects cycles or orphan pages', () => 
   assert.throws(() => validate(plan), /Unreachable/)
 })
 test('builds scoped navigation and preserves old output on validation failure', async t => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(),'sysmap-build-'))
+  const root = await fs.mkdtemp(path.join(os.tmpdir(),'deepseek-build-'))
   t.after(() => fs.rm(root,{recursive:true,force:true}))
   const source = path.join(root,'sample.plan.json'), output=path.join(root,'output')
   await fs.writeFile(source,JSON.stringify(example))
@@ -57,7 +57,7 @@ test('builds scoped navigation and preserves old output on validation failure', 
   assert.equal(await fs.readFile(path.join(output,'sample.json'),'utf8'),before)
 })
 test('local server serves only map assets and viewer', async t => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(),'sysmap-server-'))
+  const root = await fs.mkdtemp(path.join(os.tmpdir(),'deepseek-server-'))
   const server=createServer(root)
   t.after(async()=>{await new Promise(resolve=>server.close(resolve));await fs.rm(root,{recursive:true,force:true})})
   await fs.writeFile(path.join(root,'sample.json'),'{}')

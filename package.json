@@ -1,10 +1,10 @@
 {
-  "name": "sysmap-skill",
+  "name": "deepseek-planning-skill",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Portable visual system planning skill with a small map viewer.",
+  "description": "Visual system planning for DeepSeek Harness, with a clickable map viewer.",
   "license": "MIT",
   "engines": { "node": ">=20" },
-  "scripts": { "test": "node --test", "example": "node scripts/build.mjs examples/library.plan.json --out output", "view": "node scripts/serve.mjs --dir output --port 4321" }
+  "scripts": { "test": "node --test", "example": "node scripts/build.mjs examples/library.plan.json --out output", "view": "node scripts/serve.mjs --dir output --port 4322" }
 }

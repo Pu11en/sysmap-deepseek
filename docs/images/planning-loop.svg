@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 310" role="img" aria-labelledby="title desc">
-<title id="title">sysmap: from conversation to a connected system plan</title>
+<title id="title">deepseek: from conversation to a connected system plan</title>
 <desc id="desc">Talk through an idea, preserve decisions in one plan, explore the clickable map, then build only when authorized. Questions stay in chat.</desc>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker></defs>
 <rect width="1120" height="310" rx="20" fill="#f8fafc"/>
