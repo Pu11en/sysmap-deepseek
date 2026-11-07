@@ -1,5 +1,5 @@
 ---
-name: deepseek
+name: sysmap-deepseek
 description: Plan and explain systems in DeepSeek Harness through one saved, clickable map. Use for collaborative design, continuing planning, system explanations, or preparing an agreed plan for implementation. Keep questions in chat.
 ---
 

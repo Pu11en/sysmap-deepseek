@@ -1,4 +1,4 @@
-# deepseek
+# sysmap-deepseek
 
 **Visual system planning for DeepSeek Harness.**
 
@@ -6,9 +6,9 @@ Plan in chat. See the system on a map. Click a part to understand its job.
 
 This is an independent community skill for **DeepSeek Harness**, not an official DeepSeek product or a skill package for other AI applications. Previously named sysmap.
 
-![How the deepseek planning skill works: discuss, save decisions, explore the map, then build only when approved](docs/images/planning-loop.svg)
+![How the sysmap-deepseek planning skill works: discuss, save decisions, explore the map, then build only when approved](docs/images/planning-loop.svg)
 
-[See it](#see-it-in-action) · [Install in DeepSeek Harness](#install-in-deepseek-harness) · [Try the map](#try-the-map) · [Planning guide](references/planning.md)
+[See it](#see-it-in-action) · [Install in DeepSeek Harness](#install-in-sysmap-deepseek-harness) · [Try the map](#try-the-map) · [Planning guide](references/planning.md)
 
 ## See it in action
 
@@ -16,7 +16,7 @@ This is an independent community skill for **DeepSeek Harness**, not an official
 
 The included example shows how borrowing a library book works. Follow the arrows from request to result.
 
-![The deepseek map viewer showing the complete book-borrowing example](docs/images/overview.png)
+![The sysmap-deepseek map viewer showing the complete book-borrowing example](docs/images/overview.png)
 
 ### Inside one part
 
@@ -41,19 +41,19 @@ Questions stay in DeepSeek Harness chat. The side map shows how the system works
 
 ## Install in DeepSeek Harness
 
-Requires DeepSeek Harness with filesystem skill discovery enabled. Install this repository as the `deepseek` skill in your DSH home directory. The default is `~/.dsh/skills/deepseek`.
+Requires DeepSeek Harness with filesystem skill discovery enabled. Install this repository as the `sysmap-deepseek` skill in your DSH home directory. The default is `~/.dsh/skills/sysmap-deepseek`.
 
 For a default installation, run in PowerShell or a compatible shell:
 
 ```sh
-git clone https://github.com/Pu11en/deepseek.git "$HOME/.dsh/skills/deepseek"
+git clone https://github.com/Pu11en/sysmap-deepseek.git "$HOME/.dsh/skills/sysmap-deepseek"
 ```
 
-If you use a custom DSH home, place the repository in that home's `skills/deepseek` directory instead. Keep the repository together: [SKILL.md](SKILL.md) loads [the planning guide](references/planning.md).
+If you use a custom DSH home, place the repository in that home's `skills/sysmap-deepseek` directory instead. Keep the repository together: [SKILL.md](SKILL.md) loads [the planning guide](references/planning.md).
 
 Then say in a DeepSeek Harness chat:
 
-> Use the deepseek skill to plan this system. Keep questions in chat, show the system on the map, and don't build it yet.
+> Use the sysmap-deepseek skill to plan this system. Keep questions in chat, show the system on the map, and don't build it yet.
 
 If the skill does not appear, check skill discovery or reopen the chat. Installation does not change every chat's instructions automatically. This repository is a skill and map helper, not a profile-wide add-on.
 
@@ -66,7 +66,7 @@ The helper commands need **Node.js 20+** and a browser. No npm package installat
 From the installed repository:
 
 ```sh
-cd "$HOME/.dsh/skills/deepseek"
+cd "$HOME/.dsh/skills/sysmap-deepseek"
 node scripts/build.mjs examples/library.plan.json --out output
 node scripts/serve.mjs --dir output --port 4322
 ```
